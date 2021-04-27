@@ -1,6 +1,6 @@
 from itertools import combinations
 def oneday():
-    f = open("c:/Users/lmg37/Desktop/algorism/day1/puzzle.txt", 'r')
+    f = open("day1/puzzle.txt", 'r')
     lines = f.readlines()
     s = []
     answer = []
