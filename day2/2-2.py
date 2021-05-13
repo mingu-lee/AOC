@@ -13,7 +13,7 @@ def passvalid(password, password_text, valid, invalid):
 	else:
 		return True
 
-with open('day2\puzzle.txt') as f:
+with open('day2/puzzle.txt') as f:
 	for line in f:
 		lineSplit = line.split(":")
 
