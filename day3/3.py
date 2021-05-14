@@ -1,44 +1,20 @@
-# 변수명
-# 함수나누기
-# regex 사용
-'''
-나무와 마주치는 위치를 카운트한 것이 터보건
-오른쪽으로 3, 아래로 1
-[1]=3번째, [2]=6번째, [3]=9번째 끝까지 다 돌면 s = len(lines)까지 돌면 다시 [4]=s%3
-if s가 2= +1, 1= +2
-10번 후 재시작 아래로 10 1번째부터시작 - -- 1,3 2,6 3,9 ... 10,30 
-.#.....#..#..#....##.........#.
-...#...#.........#..#.#..#.....
-#.#...#.#....#.....#..#..##..##
-..#..#.#.#.....#..#..#..##.....
-.#..........#....####..##.#..#.
-....##.......#.#.....#.........
-....#......#....####.#.##......
-........##..........##......#..
-.........#........##..#.#.....#
-.#..##..........#..#...#..##.#.
-........#........#.....#....#.#
-..#.......#.###...#.......##...
-.##..##.#...#........#.........
-'''
-f = open("day3/puzzle.txt", 'r')
-lines = f.readlines()
-slopes = [(1,1),(3,1),(5,1),(7,1),(1,2)]
+def gun(t,r,c,l):
+    while r+1 < len(l):
+        r +=1
+        c +=3
 
-way = []
-for line in lines:
-    way.append(list(line.strip()))
+        way = l[r][c % len(l[r])]
+        if way == "#":
+            t +=1
+    return t
 
-ans = 1
-for (dc,dr) in slopes:
-    r = 0
-    c = 0 
-    score = 0
-    while r < len(way):
-        c += dc
-        r += dr
-        if r<len(way) and way[r][c%len(way[r])]=='#':
-            score += 1
-    ans *= score
-    if dc==3 and dr==1:
-        print(score)
+if __name__ == "__main__":
+    f = open("day3/puzzle.txt", 'r')
+    lines = f.readlines()
+    lines = [line.strip() for line in lines]
+
+    treeCount =0
+    row =0
+    col =0
+
+    print(gun(treeCount, row, col, lines))
