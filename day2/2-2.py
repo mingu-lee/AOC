@@ -5,9 +5,10 @@
 answer = 0
 
 def passvalid(password, password_text, valid, invalid):
+
 	first = password[valid] == password_text 
 	second = password[invalid] == password_text 
-
+	
 	if (first and second) or (not first and not second):
 		return False
 	else:
