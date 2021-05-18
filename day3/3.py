@@ -26,12 +26,12 @@ if __name__ == "__main__":
     col =3
     print("part1= ",toboggan(treeCount, row, col, lines))
 
-    answer = []
+    slope_answer = []
     row =[1,1,1,1,2]
     col =[1,3,5,7,1]
 
     for (i,j) in zip(row,col):
-        answer.append(toboggan(treeCount, i, j, lines))
-    print("part2= ",multiply(answer))
+        slope_answer.append(toboggan(treeCount, i, j, lines))
+    print("part2= ",multiply(slope_answer))
 
 #문제가 바뀔때 대응훈련 함수를 나누자
