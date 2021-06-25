@@ -1,7 +1,7 @@
 
 from functools import reduce
 
-def toboggan(treeCount,row,col,lines):
+def toboggan(treeCount,row,col,line:list) -> int:
     r =0
     c =0
     while r+1 < len(lines):
