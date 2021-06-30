@@ -15,6 +15,32 @@ def checkPassports(cleanedPassports):
             return False
     return True
 
+def doublecheck(vp):
+    answer = 0
+    correct = 0
+    hgtkey = ['cm','in']
+    hclkey = ['1','2','3','4','5','6','a','b','c','d','e','f']
+    eclkey = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+    for i in range(len(vp)):
+        for (k, v) in vp[i]:
+            if k == 'byr' and 1920 <= int(v) and int(v) <= 2002:
+                correct += 1
+            elif k == 'iyr' and 2010 <= int(v) and int(v) <= 2020:
+                correct += 1
+            elif k == 'eyr' and 2020<=int(v)<=2030:
+                correct += 1
+            elif k == 'hgt' and v in hgtkey:
+                correct += 1
+            else:
+                correct += 0
+            if correct <4:
+                answer += 1
+                correct =0
+    
+    return answer
+
+
+
 
 if __name__ == "__main__":
     file = open('day4/puzzle.txt', 'r')
@@ -25,3 +51,6 @@ if __name__ == "__main__":
     #print(cleanedPassports)
     validPassports = [p for p in cleanedPassports if checkPassports(p)]
     print("part1 =", len(list(validPassports)))
+    print(validPassports[0])
+    print(doublecheck(validPassports))
+    
