@@ -52,7 +52,6 @@ def part2():
                 sum += row
             three.append(sum)
             del qlist[0]
-    print(three)
     return part1(three)
 
 print(part2())
