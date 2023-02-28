@@ -30,11 +30,38 @@ In the above example, the priority of the item type that appears in both compart
 
 Find the item type that appears in both compartments of each rucksack. What is the sum of the priorities of those item types?
 
+Your puzzle answer was 7917.
+
+The first half of this puzzle is complete! It provides one gold star: *
+
+--- Part Two ---
+As you finish identifying the misplaced items, the Elves come to you with another issue.
+
+For safety, the Elves are divided into groups of three. Every Elf carries a badge that identifies their group. For efficiency, within each group of three Elves, the badge is the only item type carried by all three Elves. That is, if a group's badge is item type B, then all three Elves will have item type B somewhere in their rucksack, and at most two of the Elves will be carrying any other item type.
+
+The problem is that someone forgot to put this year's updated authenticity sticker on the badges. All of the badges need to be pulled out of the rucksacks so the new authenticity stickers can be attached.
+
+Additionally, nobody wrote down which item type corresponds to each group's badges. The only way to tell which item type is the right one is by finding the one item type that is common between all three Elves in each group.
+
+Every set of three lines in your list corresponds to a single group, but each group can have a different badge item type. So, in the above example, the first group's rucksacks are the first three lines:
+
+vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+And the second group's rucksacks are the next three lines:
+
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw
+In the first group, the only item type that appears in all three rucksacks is lowercase r; this must be their badges. In the second group, their badge item type must be Z.
+
+Priorities for these items must still be found to organize the sticker attachment efforts: here, they are 18 (r) for the first group and 52 (Z) for the second group. The sum of these is 70.
+
+Find the item type that corresponds to the badges of each three-Elf group. What is the sum of the priorities of those item types?
 '''
 
-#가져와서 반으로 나눈다
-#하나를 for 돌동안 나머지 반 리스트에 같은게 있는지 체크
-#
+import collections
+
 def atoz():
     _KEY = []
     _key = {}
@@ -58,7 +85,6 @@ def part1solution():
     answer = 0
     strategy = openfile()
     _key = atoz()
-
     for i in strategy:
         for j in i[:int(len(i)/2)]:
             if j in i[int(len(i)/2):]:
@@ -74,17 +100,36 @@ def part2solution():
     _key = atoz()
     new_list = []
     a = int(len(strategy)/3)
-    #print(''.join(strategy))
-    for i in range(0,a):
-        s = i*3
-        new_list.append(''.join(strategy[s:s+3]))
-    return new_list 
+    n = 0
+    #collections로 각 문자열을 카운트하는게 포인트
+    for i in strategy:
+        if n > 2 or n == 0:
+            one = collections.Counter(i)
+            print(one)
+            n = 0
+        elif n == 1:
+            two = collections.Counter(i)
+            print(two)
+        elif n == 2:
+            three = collections.Counter(i)
+            print(three)
+            for k,v in three.items():
+                if k in two.keys() and k in one.keys():
+                    new_list.append(k)
+                    break
+        n += 1
+
+    for index in new_list:
+        for ke,va in _key.items():
+            if index == ke:
+                answer += va
+
+    return answer 
 
 if __name__ == "__main__":
     #ret = part1solution()
     ret = part2solution()
     print(ret)
-    a = ["a","b","c"]
-    print(''.join(a[0:2]))
+
 
     
